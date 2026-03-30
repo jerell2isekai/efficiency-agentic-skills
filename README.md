@@ -23,9 +23,25 @@ Highlights:
 - deterministic verifier for official legal sources via `curl` with `agent-browser` fallback
 - structured output contract with mandatory `法條來源（官方）`
 
-## Installation
+## Install
 
-### Codex
+Use `skills.sh` if you want the standard install path for agent skills.
+
+```bash
+npx skills add -g https://github.com/jerell2isekai/efficiency-agentic-skills --skill taiwan-legal-doc
+```
+
+You can also inspect the package before installing:
+
+```bash
+npx skills add https://github.com/jerell2isekai/efficiency-agentic-skills --list
+```
+
+### Manual install
+
+If you prefer to clone the repository and copy the skill yourself:
+
+#### Codex
 
 ```bash
 git clone https://github.com/jerell2isekai/efficiency-agentic-skills.git
@@ -33,7 +49,7 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R efficiency-agentic-skills/taiwan-legal-doc "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
-### Claude Code
+#### Claude Code
 
 ```bash
 git clone https://github.com/jerell2isekai/efficiency-agentic-skills.git
@@ -100,3 +116,4 @@ Use $taiwan-legal-doc to draft a Taiwan personal data consent form for expert in
 - Only `taiwan-legal-doc` is included in the initial public push.
 - Other local skills in this workspace are intentionally withheld for now and listed as roadmap entries only.
 - AI-generated legal output should still be reviewed by a licensed Taiwan attorney before signature or live use.
+- This repository is released under the MIT License. See `LICENSE`.
