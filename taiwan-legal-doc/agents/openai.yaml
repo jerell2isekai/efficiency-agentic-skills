@@ -1,0 +1,4 @@
+interface:
+  display_name: "Taiwan Legal Docs"
+  short_description: "Draft and review Taiwan legal documents"
+  default_prompt: "Use $taiwan-legal-doc to review, triage, redline, or draft a Taiwan commercial legal document."
