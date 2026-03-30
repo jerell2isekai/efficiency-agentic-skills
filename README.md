@@ -44,9 +44,21 @@ cp -R efficiency-agentic-skills/taiwan-legal-doc .claude/skills/
 ## Quick Start
 
 ```text
+# Codex / skill reference style
 Use $taiwan-legal-doc to review this Taiwan NDA and identify material risks.
 Use $taiwan-legal-doc to redline this consultant agreement for Taiwan use.
 Use $taiwan-legal-doc to draft a Taiwan personal data consent form for expert interviews.
+
+# Other coding CLIs with slash-skill triggers
+/taiwan-legal-doc Review this Taiwan NDA and identify material risks.
+/taiwan-legal-doc Redline this consultant agreement for Taiwan use.
+/taiwan-legal-doc Draft a Taiwan personal data consent form for expert interviews.
+
+# Generic slash pattern for this repository
+/taiwan-legal-doc ...
+/arch-review ...        # coming soon
+/conductor ...          # coming soon
+/research ...           # coming soon
 ```
 
 ## Skill Catalog
