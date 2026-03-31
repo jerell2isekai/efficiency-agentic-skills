@@ -1,5 +1,7 @@
 # efficiency-agentic-skills
 
+[繁體中文版 README（taiwan-legal-doc）](taiwan-legal-doc/README.zh-TW.md)
+
 Curated agentic skills for Codex and Claude Code.
 
 This repository collects production-minded skills, references, and deterministic helpers for real workflows. The first public release focuses on Taiwan commercial legal drafting and review. Additional skills from this workspace are planned and listed below as `coming soon`.
