@@ -1,0 +1,75 @@
+{
+  "skill_name": "taiwan-legal-doc",
+  "evals": [
+    {
+      "id": 1,
+      "name": "quick-triage",
+      "prompt": "幫我快速看一下這份 NDA 有沒有大問題：\n\n第一條（保密資訊定義）：甲方提供之一切資訊均屬保密資訊。\n第二條（保密義務）：乙方不得洩漏保密資訊，違者賠償新台幣伍佰萬元整。\n第三條（期間）：本合約自簽署日起永久有效。\n第四條（管轄法院）：雙方同意以台灣台北地方法院為第一審管轄法院。",
+      "expected_output": "Quick Triage 格式輸出，包含風險等級、法條來源（官方）區塊，且法條 URL 來自 law.moj.gov.tw",
+      "files": [],
+      "assertions": [
+        {"name": "has-triage-header", "type": "contains", "value": "初步分流"},
+        {"name": "has-risk-level", "type": "regex", "value": "(Green|Yellow|Red)"},
+        {"name": "has-legal-source-section", "type": "contains", "value": "法條來源（官方）"},
+        {"name": "has-moj-url", "type": "contains", "value": "law.moj.gov.tw"},
+        {"name": "has-verification-marker", "type": "regex", "value": "(已依 law\\.moj\\.gov\\.tw 驗證|未驗證|驗證失敗)"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "full-review",
+      "prompt": "請完整審查這份顧問合約：\n\n顧問合約書\n甲方：某某科技股份有限公司\n乙方：王大明\n\n第一條（服務內容）：乙方應提供技術諮詢服務。\n第二條（報酬）：甲方每月支付乙方新台幣拾萬元整。\n第三條（智慧財產權）：乙方於服務期間之一切著作，其著作權歸屬甲方。\n第四條（保密條款）：乙方於合約期間及終止後應保守甲方營業秘密。\n第五條（違約金）：任一方違約應賠償他方新台幣壹仟萬元整。\n第六條（個人資料）：甲方得蒐集、處理及利用乙方個人資料。\n第七條（合約期間）：本合約自民國 115 年 4 月 1 日起至 116 年 3 月 31 日止。\n第八條（管轄法院）：雙方合意以台灣台北地方法院為管轄法院。",
+      "expected_output": "Full Review 格式輸出，包含 P0-P3 findings、法條來源（官方）區塊、law.moj.gov.tw URLs",
+      "files": [],
+      "assertions": [
+        {"name": "has-review-header", "type": "contains", "value": "審查報告"},
+        {"name": "has-severity-tag", "type": "regex", "value": "P[0-3]"},
+        {"name": "has-legal-source-section", "type": "contains", "value": "法條來源（官方）"},
+        {"name": "has-moj-url", "type": "contains", "value": "law.moj.gov.tw"},
+        {"name": "has-verification-marker", "type": "regex", "value": "(已依 law\\.moj\\.gov\\.tw 驗證|未驗證|驗證失敗)"},
+        {"name": "has-attorney-disclaimer", "type": "contains", "value": "執業律師"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "redline",
+      "prompt": "請幫這份保密條款做 redline：\n\n第四條（保密義務）\n一、乙方對於因本合約而知悉之甲方一切資訊，均負保密義務。\n二、乙方違反前項義務者，應賠償甲方新台幣壹仟萬元之懲罰性違約金。\n三、本保密義務無期限限制。",
+      "expected_output": "Redline 格式輸出，有目前文字、建議替換文字、法條來源（官方），含 law.moj.gov.tw URLs",
+      "files": [],
+      "assertions": [
+        {"name": "has-redline-structure", "type": "regex", "value": "(目前文字|建議替換文字)"},
+        {"name": "has-legal-source-section", "type": "contains", "value": "法條來源（官方）"},
+        {"name": "has-moj-url", "type": "contains", "value": "law.moj.gov.tw"},
+        {"name": "has-verification-marker", "type": "regex", "value": "(已依 law\\.moj\\.gov\\.tw 驗證|未驗證|驗證失敗)"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "draft",
+      "prompt": "幫我起草一份個資蒐集同意書，用途是公司要做員工健康檢查，需要蒐集員工的姓名、身分證字號、出生日期和健康檢查報告。公司名稱是「好健康科技股份有限公司」，請用台北地方法院管轄。",
+      "expected_output": "Draft 格式輸出，完整合約草稿，附法條來源（官方）含 law.moj.gov.tw URLs",
+      "files": [],
+      "assertions": [
+        {"name": "has-company-name", "type": "contains", "value": "好健康科技"},
+        {"name": "has-pdpa-reference", "type": "contains", "value": "個人資料保護法"},
+        {"name": "has-legal-source-section", "type": "contains", "value": "法條來源（官方）"},
+        {"name": "has-moj-url", "type": "contains", "value": "law.moj.gov.tw"},
+        {"name": "has-verification-marker", "type": "regex", "value": "(已依 law\\.moj\\.gov\\.tw 驗證|未驗證|驗證失敗)"}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "clause-insert",
+      "prompt": "我有一份顧問合約，想加入一條「競業禁止」條款。顧問是自然人，服務期間一年，我希望競業禁止期間是離職後兩年，範圍是台灣地區的同類型 AI 技術顧問服務。請給我條款文字和放置建議。",
+      "expected_output": "Clause Insert 格式，包含條款文字、放置建議、衝突分析、法條來源（官方）含 law.moj.gov.tw URLs",
+      "files": [],
+      "assertions": [
+        {"name": "has-clause-text", "type": "regex", "value": "(競業禁止|競業)"},
+        {"name": "has-placement-advice", "type": "regex", "value": "(放置|位置|建議)"},
+        {"name": "has-legal-source-section", "type": "contains", "value": "法條來源（官方）"},
+        {"name": "has-moj-url", "type": "contains", "value": "law.moj.gov.tw"},
+        {"name": "has-verification-marker", "type": "regex", "value": "(已依 law\\.moj\\.gov\\.tw 驗證|未驗證|驗證失敗)"}
+      ]
+    }
+  ]
+}

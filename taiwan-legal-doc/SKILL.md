@@ -14,11 +14,12 @@ Handle Taiwan-focused commercial legal documents. Keep the skill narrow: draft d
 
 1. Keep Taiwan law as the governing baseline unless the user explicitly chooses another jurisdiction.
 2. Treat `https://law.moj.gov.tw` as the primary source for Taiwan legal requirements, article numbers, and current law status. Treat local references in this skill as secondary working summaries, not final citation authority.
-3. Distinguish **法律要求** from **drafting preferences**. Cite statutes only after official-source verification. Label non-statutory points as typical, preferred, risk-reducing practice, or negotiation posture.
-4. Prefer the user's contract playbook or fallback positions when provided, but never let internal preference override Taiwan law or enforceability constraints.
-5. Do not invent missing parties, courts, dates, attachments, or clause text you have not seen. Use `[待填]` placeholders when the user asks you to proceed without complete information.
-6. If the request is really litigation, dispute strategy, labor law, tax, or abstract legal Q&A, say this skill is out of scope instead of stretching it.
-7. After finishing contract drafting or review, always append a `法條來源（官方）` section listing every statute cited in the output or contract notes, with `law.moj.gov.tw` source URLs. If no statute is cited, say so explicitly.
+3. **Every mode — including Quick Triage and Draft — must run `scripts/verify_official_legal_source.py` (or direct `curl` to `law.moj.gov.tw`) for every statute or article it mentions, references, or relies on.** No exception. If the verification script is unreachable or the article cannot be confirmed, the output must say so explicitly and mark the citation as `未驗證`. Do not present any article number as confirmed without a successful verification call.
+4. Distinguish **法律要求** from **drafting preferences**. Cite statutes only after official-source verification. Label non-statutory points as typical, preferred, risk-reducing practice, or negotiation posture.
+5. Prefer the user's contract playbook or fallback positions when provided, but never let internal preference override Taiwan law or enforceability constraints.
+6. Do not invent missing parties, courts, dates, attachments, or clause text you have not seen. Use `[待填]` placeholders when the user asks you to proceed without complete information.
+7. If the request is really litigation, dispute strategy, labor law, tax, or abstract legal Q&A, say this skill is out of scope instead of stretching it.
+8. After finishing contract drafting or review, always append a `法條來源（官方）` section listing every statute cited in the output or contract notes, with `law.moj.gov.tw` source URLs. If no statute is cited, say so explicitly.
 
 ## Mode Selection
 
@@ -121,11 +122,12 @@ Deterministic helper:
 - Use `--transport agent-browser` when the page is readable in browser automation but `curl` is insufficient for the verification task
 - Capture the verified law page URL from the script output for the final `法條來源（官方）` section
 
-Downgrade wording when unverified:
+When verification genuinely fails (network error, page not found, ambiguous result), use these labels — but treat them as last-resort fallbacks, not convenient shortcuts to skip verification:
 
-- Allowed: `依本 skill 內部參考資料初步判斷`
-- Allowed: `需再以法務部全國法規資料庫確認`
-- Not allowed: fabricated article numbers, confident "現行法就是如此" claims, or fake statutory quotes
+- Fallback: `依本 skill 內部參考資料初步判斷（未驗證）`
+- Fallback: `需再以法務部全國法規資料庫確認（驗證失敗）`
+- Never allowed: fabricated article numbers, confident "現行法就是如此" claims, or fake statutory quotes
+- Never allowed: skipping the verification call entirely because the mode is "quick" or "draft"
 
 When the output cites a verified statute, capture the official law page URL for the final `法條來源（官方）` section.
 
@@ -145,9 +147,9 @@ If the user has a legal playbook or wants review calibrated to internal standard
 
 #### `Quick Triage`
 
-Use this when the user wants a fast decision, not a full markup.
+Use this when the user wants a fast decision, not a full markup. Speed does not override accuracy — every statute referenced in the triage output must be verified against `law.moj.gov.tw` before the output is finalized.
 
-If the routing decision depends on a claimed statutory conflict or current-law status, verify the key legal point via `law.moj.gov.tw` first. If you cannot verify it, downgrade the conclusion to a provisional risk signal rather than a definitive legal conflict.
+Run `scripts/verify_official_legal_source.py` for each statute or article number that informs the risk rating, escalation advice, or immediate-action recommendation. Include the verified URLs in the `法條來源（官方）` section. If a statute cannot be verified, mark it as `（未驗證）` and note the verification failure.
 
 Output:
 
@@ -167,7 +169,7 @@ Output:
 
 Load `references/review-triage.md` first.
 
-If no statute is actually cited in the triage output, still include:
+Even in Quick Triage, the risk assessment almost always touches on at least one statute (個資法, 營業秘密法, 著作權法, or 民法). Identify and verify them. If after thorough analysis the triage genuinely cites no statute, include:
 
 ```md
 ### 法條來源（官方）
@@ -214,13 +216,13 @@ Severity meanings:
 
 Load `references/review-playbook.md` when internal standards, negotiation posture, or fallback language matter.
 
-If a finding depends on a verified statute, prefer citation wording like:
+Every finding that cites a statute must be verified via `scripts/verify_official_legal_source.py` or direct `curl` to `law.moj.gov.tw` before inclusion. Use this citation format for verified statutes:
 
 - `個人資料保護法第 8 條（已依 law.moj.gov.tw 驗證）`
 - `營業秘密法第 2 條（已依 law.moj.gov.tw 驗證）`
 - `民法第 252 條（已依 law.moj.gov.tw 驗證）`
 
-Always include the matching official source URLs in the final `法條來源（官方）` section.
+If verification fails, mark the citation as `（未驗證）` and explain the failure. Always include the matching official source URLs in the final `法條來源（官方）` section.
 
 #### `Redline`
 
@@ -259,7 +261,7 @@ Output:
 
 Use `references/review-playbook.md` when fallback positions matter and `references/clause-risk-patterns.md` when replacement wording needs Taiwan-specific clause engineering.
 
-If the `修正理由` relies on a statute or article number, verify it via `law.moj.gov.tw` first or downgrade the explanation to `可執行性風險` / `實務偏好`.
+Every `修正理由` that cites a statute or article number must be verified via `law.moj.gov.tw` before inclusion. Run the verification script for each cited article. If verification fails, mark the citation as `（未驗證）` — do not silently downgrade to `可執行性風險` or `實務偏好` as a way to skip verification.
 
 #### `Draft`
 
@@ -283,7 +285,7 @@ After the draft, always append:
 
 Use `references/clause-risk-patterns.md` and `references/tw-legal-framework.md` while drafting.
 
-If the draft includes statutory notes, compliance statements, or article-based caveats, verify those legal points via `law.moj.gov.tw` first.
+Drafting a contract from scratch still requires verifying every statute cited in the operative clauses, notes, or compliance statements. Run `scripts/verify_official_legal_source.py` for each article referenced in the draft. A draft with unverified law citations is incomplete — verify first, then finalize.
 
 #### `Clause Insert`
 
@@ -293,7 +295,7 @@ Provide:
 2. Recommended placement
 3. Definitions or cross-references that must also change
 4. Any collision with existing liability, confidentiality, IP, or data-handling language
-5. `法條來源（官方）` if the clause text or explanation cites statutes
+5. `法條來源（官方）` — verify every statute cited in the clause text or explanation via `law.moj.gov.tw` and list the verified URLs. This is mandatory, not conditional.
 
 ## Reference Map
 

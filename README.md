@@ -85,14 +85,11 @@ Use $taiwan-legal-doc to draft a Taiwan personal data consent form for expert in
 | --- | --- | --- |
 | `taiwan-legal-doc` | available | Taiwan legal drafting and review |
 | `arch-review` | coming soon | architecture review workflow |
-| `chrome-cdp` | coming soon | local Chrome inspection |
 | `conductor` | coming soon | end-to-end task orchestration |
 | `crossover` | coming soon | cross-agent review workflow |
 | `design-conductor` | coming soon | design orchestration |
-| `ecpay-api-skill` | coming soon | ECPay integration workflow |
 | `git` | coming soon | git and GitHub operations |
 | `handover` | coming soon | cross-session continuity |
-| `image-gen` | coming soon | image generation workflow |
 | `orient` | coming soon | repository orientation |
 | `planner` | coming soon | planning workflow |
 | `prelude` | coming soon | shared governance bootstrap |
