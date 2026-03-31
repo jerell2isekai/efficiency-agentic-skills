@@ -1,12 +1,12 @@
 ---
 name: taiwan-legal-doc
 description: |
-  Draft, triage, review, redline, revise, or add clauses to Taiwan (R.O.C.) commercial legal documents, especially NDAs (保密協議), personal data consent forms (個資同意書), consultant/service agreements (顧問合約/服務合約), IP assignment agreements (著作權讓與/智財權歸屬), portrait/likeness authorizations (肖像授權), and combined instruments. Use when the user asks to draft, review, redline, revise, or insert clauses into a specific Taiwan commercial document, provides a PDF/DOCX/text contract for Taiwan-focused analysis, wants quick risk triage, or wants clause-by-clause replacement language. Also trigger when 個資法, 營業秘密法, 著作權法, 保密條款, 違約金條款, contract review, NDA review, 合約審查, redline, or clause insertion are mentioned in the context of a concrete document. Do NOT use for litigation, court filings, family law, criminal defense, tax law, labor disputes, immigration, or abstract legal Q&A unrelated to drafting or reviewing a specific Taiwan commercial document.
+  Draft, triage, review, redline, revise, or add clauses to Taiwan (R.O.C.) commercial and employment legal documents, especially NDAs (保密協議), personal data consent forms (個資同意書), consultant/service agreements (顧問合約/服務合約), IP assignment agreements (著作權讓與/智財權歸屬), portrait/likeness authorizations (肖像授權), employment contracts (勞動契約/僱傭合約), non-compete agreements (競業禁止), and combined instruments. Use when the user asks to draft, review, redline, revise, or insert clauses into a specific Taiwan commercial or employment document, provides a PDF/DOCX/text contract for Taiwan-focused analysis, wants quick risk triage, or wants clause-by-clause replacement language. Also trigger when 個資法, 營業秘密法, 著作權法, 勞基法, 勞動基準法, 勞動契約, 僱傭合約, 資遣費, 加班費, 競業禁止, 保密條款, 違約金條款, contract review, NDA review, employment contract, 合約審查, redline, or clause insertion are mentioned in the context of a concrete document. Do NOT use for litigation, court filings, family law, criminal defense, tax law, immigration, or abstract legal Q&A unrelated to drafting or reviewing a specific Taiwan document.
 ---
 
 # Taiwan Legal Document Drafter & Reviewer
 
-Handle Taiwan-focused commercial legal documents. Keep the skill narrow: draft documents, insert clauses, triage incoming contracts, redline visible text, and review concrete documents for Taiwan use. Do not drift into general legal research or non-Taiwan practice unless the user explicitly asks for cross-border comparison.
+Handle Taiwan-focused commercial and employment legal documents. Keep the skill narrow: draft documents, insert clauses, triage incoming contracts, redline visible text, and review concrete documents for Taiwan use. Do not drift into general legal research or non-Taiwan practice unless the user explicitly asks for cross-border comparison.
 
 **Important**: Produce AI-assisted drafts and reviews only. Advise the user to have a licensed Taiwan attorney (台灣執業律師) review any document before signature, filing, or live use.
 
@@ -18,7 +18,7 @@ Handle Taiwan-focused commercial legal documents. Keep the skill narrow: draft d
 4. Distinguish **法律要求** from **drafting preferences**. Cite statutes only after official-source verification. Label non-statutory points as typical, preferred, risk-reducing practice, or negotiation posture.
 5. Prefer the user's contract playbook or fallback positions when provided, but never let internal preference override Taiwan law or enforceability constraints.
 6. Do not invent missing parties, courts, dates, attachments, or clause text you have not seen. Use `[待填]` placeholders when the user asks you to proceed without complete information.
-7. If the request is really litigation, dispute strategy, labor law, tax, or abstract legal Q&A, say this skill is out of scope instead of stretching it.
+7. If the request is really litigation, dispute strategy, tax planning, or abstract legal Q&A, say this skill is out of scope instead of stretching it.
 8. After finishing contract drafting or review, always append a `法條來源（官方）` section listing every statute cited in the output or contract notes, with `law.moj.gov.tw` source URLs. If no statute is cited, say so explicitly.
 
 ## Mode Selection
@@ -39,7 +39,7 @@ Choose the lightest mode that matches the request:
 
 Establish these items before writing or reviewing:
 
-1. **Document type** — NDA, consent form, service agreement, consultant agreement, IP assignment, portrait authorization, or combined instrument
+1. **Document type** — NDA, consent form, service agreement, consultant agreement, IP assignment, portrait authorization, employment contract (勞動契約/僱傭合約), non-compete agreement, or combined instrument
 2. **Parties and roles** — company legal name, counterparty role, and whether the user is protecting the discloser, the recipient, the buyer, the vendor, or a neutral form
 3. **Subject matter** — what services, information, personal data, IP, likeness, or deliverables are involved
 4. **Jurisdiction** — default to Taiwan law and a specific Taiwan district court unless the user says otherwise
@@ -84,12 +84,13 @@ Use these intake rules:
 
 ### Step 4: Determine the Governing Legal Baseline
 
-Read `references/tw-legal-framework.md` for Taiwan law issue-spotting. Use it to identify which statutes matter:
+Read `references/tw-legal-framework.md` for Taiwan commercial law issue-spotting. For employment/labor contracts, also read `references/tw-labor-framework.md`. Use them to identify which statutes matter:
 
 - 個資法 / 施行細則
 - 營業秘密法
 - 著作權法
 - 民法違約金與一般契約原則
+- 勞動基準法 / 勞工退休金條例 / 性別平等工作法 / 就業服務法 / 職業安全衛生法 (for employment documents)
 
 Before presenting any **法律要求**, article number, or "current law" claim, follow `references/official-legal-sources.md` and verify against the official source at `law.moj.gov.tw`.
 
@@ -312,7 +313,9 @@ Provide:
 - `references/clause-risk-patterns.md`
   Use for clause design, common red flags, and Taiwan-specific drafting patterns.
 - `references/tw-legal-framework.md`
-  Use for issue-spotting and Taiwan legal grounding before official-source verification.
+  Use for commercial law issue-spotting and Taiwan legal grounding before official-source verification.
+- `references/tw-labor-framework.md`
+  Use for employment/labor contract issue-spotting: LSA termination, severance, non-compete, working hours, overtime, leave, wage structure, and pension obligations.
 
 ## Constraints
 

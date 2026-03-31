@@ -1,17 +1,24 @@
-# 台灣商務法律文件助手
+# 台灣商務及勞動法律文件助手
 
 [English](../README.md)
 
-用 Claude Code 或 Codex 起草、審查台灣商務法律文件的技能（skill）。產出僅供參考，正式使用前請找台灣執業律師看過。
+用 Claude Code 或 Codex 起草、審查台灣商務及僱傭法律文件的技能（skill）。丟合約進來就能跑初篩、逐條審查、紅線修改或從零起草。產出僅供參考，正式使用前請找台灣執業律師看過。
 
 ## 支援的文件類型
 
+**商務合約**
 - 保密協議（NDA）
 - 個人資料蒐集同意書
 - 顧問合約、服務合約
 - 著作權讓與、智慧財產權歸屬條款
 - 肖像授權書
 - 混合型合約（同時包含多種條款）
+
+**勞動 / 僱用合約**
+- 勞動契約（不定期 / 定期）
+- 競業禁止條款
+- 工時、加班、休假相關條款
+- 資遣與離職相關條款
 
 ## 功能特色
 
@@ -23,12 +30,24 @@
 | Draft | 從零起草台灣適用的合約，以繁體中文為預設語言 |
 | Clause Insert | 對既有合約新增或替換特定條款，檢查與現有條文的衝突 |
 
-法規引用方面：
+法條引用不靠記憶：
 
 - 法條出處一律對照法務部「全國法規資料庫」（law.moj.gov.tw）
 - 內建驗證腳本，透過 `curl` 或 `agent-browser` 自動比對官方條文
 - 每份輸出都附 `法條來源（官方）` 區塊，列出引用法規的官方連結
 - 區分「法律要求」和「起草偏好」，不把慣例當成法律義務
+
+法規基線涵蓋：
+
+- 個人資料保護法（個資法）及施行細則
+- 營業秘密法
+- 著作權法
+- 民法（違約金、定型化契約）
+- 勞動基準法（工時、加班、資遣、競業禁止）
+- 勞工退休金條例（勞退新制 6% 提撥）
+- 性別平等工作法（產假、陪產假、育嬰留停）
+- 就業服務法（就業歧視、外籍勞工）
+- 職業安全衛生法（健檢、職災通報）
 
 ## 安裝方式
 
@@ -72,6 +91,8 @@ Use $taiwan-legal-doc to review this Taiwan NDA and identify material risks.
 /taiwan-legal-doc 審查這份台灣 NDA，找出重大風險。
 /taiwan-legal-doc 幫這份顧問合約做 redline，確保符合台灣法規。
 /taiwan-legal-doc 起草一份個資蒐集同意書，用途是專家訪談。
+/taiwan-legal-doc 審查這份勞動契約，看資遣費和競業禁止條款有沒有問題。
+/taiwan-legal-doc 起草一份不定期勞動契約，含試用期和加班約定。
 ```
 
 ## 運作流程
@@ -93,7 +114,8 @@ Use $taiwan-legal-doc to review this Taiwan NDA and identify material risks.
 | `references/official-legal-sources.md` | 官方法規驗證流程 |
 | `references/legal-local-playbook-template.md` | 組織內部審查偏好的範本格式 |
 | `references/clause-risk-patterns.md` | 條款設計與常見紅旗模式 |
-| `references/tw-legal-framework.md` | 台灣法律爭點辨識基礎 |
+| `references/tw-legal-framework.md` | 台灣商業法律爭點辨識基礎 |
+| `references/tw-labor-framework.md` | 台灣勞動法規基礎（勞基法、勞退、性平法、就服法、職安法） |
 
 ## 注意事項
 
