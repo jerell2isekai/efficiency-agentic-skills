@@ -1,3 +1,6 @@
+# Public export policy:
+# - Only explicitly allowlisted public skills are tracked here.
+# - Repo-local / private skills stay ignored unless intentionally published later.
 /*
 !/.gitignore
 !/README.md
