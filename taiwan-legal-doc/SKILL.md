@@ -1,7 +1,7 @@
 ---
 name: taiwan-legal-doc
-description: |
-  Draft, triage, review, redline, revise, or add clauses to Taiwan (R.O.C.) commercial and employment legal documents, especially NDAs (保密協議), personal data consent forms (個資同意書), consultant/service agreements (顧問合約/服務合約), IP assignment agreements (著作權讓與/智財權歸屬), portrait/likeness authorizations (肖像授權), employment contracts (勞動契約/僱傭合約), non-compete agreements (競業禁止), and combined instruments. Use when the user asks to draft, review, redline, revise, or insert clauses into a specific Taiwan commercial or employment document, provides a PDF/DOCX/text contract for Taiwan-focused analysis, wants quick risk triage, or wants clause-by-clause replacement language. Also trigger when 個資法, 營業秘密法, 著作權法, 勞基法, 勞動基準法, 勞動契約, 僱傭合約, 資遣費, 加班費, 競業禁止, 保密條款, 違約金條款, contract review, NDA review, employment contract, 合約審查, redline, or clause insertion are mentioned in the context of a concrete document. Do NOT use for litigation, court filings, family law, criminal defense, tax law, immigration, or abstract legal Q&A unrelated to drafting or reviewing a specific Taiwan document.
+description: >
+  Draft, review, redline, revise, or add clauses to Taiwan commercial and employment legal documents such as NDAs, personal data consents, consultant/service agreements, IP assignment, portrait authorizations, employment contracts, and non-competes. Use when the user provides or wants a specific Taiwan-focused contract or clause in PDF/DOCX/text, asks for risk triage, clause replacement language, or contract review tied to a concrete document. Trigger on mentions such as 合約審查, NDA review, employment contract, 勞動契約, 僱傭合約, 資遣費, 加班費, redline, clause insertion, 個資法, 營業秘密法, 著作權法, 勞基法, 保密條款, 違約金條款, or 競業禁止 in the context of drafting or reviewing a concrete Taiwan document. Do not use for litigation, filings, family law, criminal defense, tax, immigration, or abstract legal Q&A.
 ---
 
 # Taiwan Legal Document Drafter & Reviewer
