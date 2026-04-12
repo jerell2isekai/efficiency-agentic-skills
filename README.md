@@ -75,7 +75,7 @@ Use $taiwan-legal-doc to draft a Taiwan personal data consent form for expert in
 # Generic slash pattern for this repository
 /taiwan-legal-doc ...
 /arch-review ...        # coming soon
-/conductor ...          # coming soon
+/sisyphus ...          # coming soon
 /research ...           # coming soon
 ```
 
@@ -85,7 +85,7 @@ Use $taiwan-legal-doc to draft a Taiwan personal data consent form for expert in
 | --- | --- | --- |
 | `taiwan-legal-doc` | available | Taiwan legal drafting and review |
 | `arch-review` | coming soon | architecture review workflow |
-| `conductor` | coming soon | end-to-end task orchestration |
+| `sisyphus` | coming soon | end-to-end task orchestration |
 | `crossover` | coming soon | cross-agent review workflow |
 | `design-conductor` | coming soon | design orchestration |
 | `git` | coming soon | git and GitHub operations |
